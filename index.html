@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-  p.indent {
-    text-indent: 30px;
-  }
-  
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -20,11 +16,8 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <!--<a id="forkme_banner" href="https://github.coecis.cornell.edu/jwl266/Jacob-Lashin-3400-Project">View on GitHub</a>-->
-
           <h1 id="project_title">ECE 4760 Final Project</h1>
           <h2 id="project_tagline">Jacob Lashin, Romano Tio, Christopher Schiff</h2>
-
         </header>
     </div>
 
@@ -49,10 +42,10 @@
           High-Level Design
         </h1>
         <img src="hardwareLayout.png" alt="Hardware Layout">
-        <p class="indent">
-          Our project is split into three major parts: frequency identification, note classification, and MIDI conversion. In order to accomplish audio identification, we utilize a microphone and ADC converter to feed audio information into a fixed-point implementation of an FFT. The fixed point implementation was provided to us by Dr. Adams earlier on in the semester, however, we changed it slightly so that we could detect every peak instead of just one maximum frequency. From the output of the FFT, we implemented note classification which classifies bins from FFT that met certain conditions into actual music notes. In order for a sound to be classified, its respective bin from the FFT must reach a certain threshold, chosen by us through observation, so that we do not incorrectly detect and classify noise as a viable note. Additionally, the respective bin must be a peak, meaning it must have the largest magnitude in comparison to its neighbors. This requirement gives us the functionality to not make the mistake of classifying several notes at once.
+        <p style="margin-left: 40px">
+          .Our project is split into three major parts: frequency identification, note classification, and MIDI conversion. In order to accomplish audio identification, we utilize a microphone and ADC converter to feed audio information into a fixed-point implementation of an FFT. The fixed point implementation was provided to us by Dr. Adams earlier on in the semester, however, we changed it slightly so that we could detect every peak instead of just one maximum frequency. From the output of the FFT, we implemented note classification which classifies bins from FFT that met certain conditions into actual music notes. In order for a sound to be classified, its respective bin from the FFT must reach a certain threshold, chosen by us through observation, so that we do not incorrectly detect and classify noise as a viable note. Additionally, the respective bin must be a peak, meaning it must have the largest magnitude in comparison to its neighbors. This requirement gives us the functionality to not make the mistake of classifying several notes at once.
         </p>
-        <p class="indent">
+        <p style="margin-left: 40px">
           Once those requirements are met, we can then actually classify the bins we have detected in our sound as notes. On startup, we populate a table full of notes and their respective frequency. In order to classify notes, we compare the frequency of the sound heard to those of the frequencies in the note lookup table. We do this by comparing the difference between the bin and each frequency in our lookup table iteratively, and retaining the index of the note which has the least distance between itself and the bin under examination. That index can then be used to return the actual note played and which octave it is played in.
         </p>
         <br>
