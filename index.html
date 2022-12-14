@@ -44,7 +44,6 @@
         <h1>
           High-Level Design
         </h1>
-        <img src="hardwareLayout.png" alt="Hardware Layout">
         <p style="text-indent: 40px">
           Our project is split into three major parts: frequency identification, note classification, and MIDI conversion. In order to accomplish audio identification, we utilize a microphone and ADC converter to feed audio information into a fixed-point 
           implementation of an FFT. The fixed point implementation was provided to us by Dr. Adams earlier on in the semester, however, we changed it slightly so that we could detect every peak instead of just one maximum frequency. From the output of the 
@@ -86,6 +85,7 @@
         <h1>
           Hardware Design
         </h1>
+        <img src="hardwareLayout.png" alt="Hardware Layout">
         <p style="text-indent: 40px">
           Our final project consisted of very few hardware components because of the nature of the project. The only components required for our project to work are the microphone, the ‘STOP_TRACK’ button, and the serial communication port. The VGA display is used 
           for debugging and verification purposes.
