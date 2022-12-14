@@ -175,6 +175,13 @@
         <p style="text-indent: 40px">
         The two main requirements for implementing the model were first, to build and train the actual model using TensorFlow, and second, to convert and deploy the model using the Pico port of the TensorFlow Lite Micro (TFLμ) library (i.e., the Pico-specific microcontroller port of TensorFlow). To learn and become familiar with both of these steps, we began by following the previously mentioned TensorFlow/ARM article and its included Jupyter notebook. Using this, we were able to successfully reproduce the fire alarm detection model and deploy it on our Pico. 
         </p>
+        <h2> Research Results
+        </h2>
+        <p style="text-indent: 40px">
+          From the very beginning of our research effort it was immediately clear that even monophonic pitch detection is a very non-trivial problem. While pitch tracking can be found across many different audio classification tasks and contexts, for the application of MIDI conversion it is best categorized as an automatic music transcription (AMT) problem. AMT is itself considered a small subset of the much larger field of music information retrieval (MIR). 
+Within these fields, our goal of polyphonic pitch detection is often referred to as multipitch estimation (MPE) or specifically multi-f0 pitch tracking (where f0 refers to fundamentals). As predicted, the use of deep learning for both MPE and MIDI conversion has seen a large amount of (successful) exploration in recent years. In particular, one approach that has gained traction in recent years is to train models to identify pitch “salience.” Salience (with respect to pitch) is defined as  
+However, none of the (usable and open source) models we found were designed with real-time execution in mind, let alone deployment on a heavily resource constrained microcontroller. One example of this is the SPICE model (citation). While SPICE does actually have a TensorFlow Lite version readily available, it was (at least at the time of this project) ~8 MB large, four times the size of the Pico’s total 2 MB of flash. Post-training quantization would at most result in a 4x reduction in size, bringing it down to a still far too large ~2 MB. Early on in the project we considered attempting to use additional QSPI modules for more memory, but decided against it as any model large enough to require it would almost definitely not be able to meet our real-time constraint anyways. Additionally, trying to access the memory would require even more of our limited time.
+        </p>
         <h1>
           Appendix
         </h1>
