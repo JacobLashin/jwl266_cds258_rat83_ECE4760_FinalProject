@@ -157,6 +157,25 @@
         <br>
         <br>
         <h1>
+          Machine Learning Exploration
+        </h1>
+        <h2> Overview
+        </h2>
+        <p style="text-indent: 40px">
+         While the note classification in our final design at the time of submission only uses a (comparatively) simple short-time Fourier transform, this was by far not the intended outcome. While one part of our group was working on the MIDI generation aspect of the project, the other was concurrently researching and attempting to implement a real-time machine learning model for pitch classification, with the goal of deploying it on the RP2040 in tandem with the MIDI generation code. Unfortunately, while a large amount of time was invested and an equally large amount of progress was made, it was ultimately far too ambitious for the four-week time frame allotted. However, we are confident in the direction of this work, and plan to continue developing it outside of the class. This portion of the report will discuss this aspect of the project in detail: specifically, the motivation, research results, implementation results, reflections, and aims for continuation/future development.  
+        </p>
+        <h2> Motivation
+        </h2>
+        <p style="text-indent: 40px">
+          The original aim for this project was not MIDI conversion, but instead to explore the RP2040 as a platform for real-time audio classification (the MIDI aspect was decided on later as a potential application). The inspiration for the project came generally from a TinyML talk on using the RP2040 as a real-time inference platform (https://www.youtube.com/watch?v=xTI4UeEOzkY), and specifically from a TensorFlow article by ARM demonstrating real-time detection of fire alarms (https://blog.tensorflow.org/2021/09/TinyML-Audio-for-everyone.html).
+          As musicians, we had a strong interest in trying to extend this idea to a musical concept that we (and others) would find personally useful. Some initial ideas involved chord classification and bassline generation, but we ultimately decided on MIDI conversion. We made this decision mainly based on believing MIDI conversion to be a more reasonable goal that would involve significant development outside of the machine learning model and more importantly, does not entirely rely on the model being completed to work. Specifically, the aim was to develop a model that could take in a spectrogram (from our STFT) and return an array of predicted notes for the MIDI conversion code to post-process. We figured that this task might be well suited to a convolutional neural network, as it could theoretically learn to extract features allowing it to differentiate between fundamentals, harmonics, and noise, enabling more accurate polyphonic detection (detecting multiple pitches simultaneously) than if we were to only use our STFT. This structure also allowed us to fall back on the STFT when it was clear we would not have enough time to complete a model. 
+        </p>
+        <h2> Beginning Development
+        </h2>
+        <p style="text-indent: 40px">
+        The two main requirements for implementing the model were first, to build and train the actual model using TensorFlow, and second, to convert and deploy the model using the Pico port of the TensorFlow Lite Micro (TFLμ) library (i.e., the Pico-specific microcontroller port of TensorFlow). To learn and become familiar with both of these steps, we began by following the previously mentioned TensorFlow/ARM article and its included Jupyter notebook. Using this, we were able to successfully reproduce the fire alarm detection model and deploy it on our Pico. 
+        </p>
+        <h1>
           Appendix
         </h1>
         <ul>
